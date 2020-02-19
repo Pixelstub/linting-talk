@@ -6,6 +6,14 @@ import os
 
 import boto3
 
+import logging
+
+logging.basicConfig(
+    format="%(levelname)-10s:  %(threadName)-20s: %(funcName)-20s:  %(message)s"
+)
+logger = logging.getLogger("transformers")
+logger.setLevel(os.environ.get("LOGGING_LEVEL", "INFO"))
+
 DOCKERARN = "arn:aws:iam::1234567890:role/dev-ashton-honnecke-role"
 WEBARN = "arn:aws:iam::1234567891:role/dev-ashton-honnecke-role"
 
@@ -55,7 +63,7 @@ def auth():
     # # Use the Amazon S3 resource object that is now configured with the
     # # credentials to access your S3 buckets.
     # for bucket in s3_resource.buckets.all():
-    #     print(bucket.name)
+    #     logger.debug(bucket.name)
 
     return {
         "aws_access_key_id": credentials["AccessKeyId"],
@@ -77,7 +85,7 @@ if __name__ == "__main__":
     for cluster, services in serviceArns.items():
         for service in services:
             if args.service in service:
-                # print(f'{args.service} is in {service}')
+                logger.debug(f"{args.service} is in {service}")
                 service_match = service
                 cluster_match = cluster
 
@@ -85,7 +93,7 @@ if __name__ == "__main__":
 
     response = ecs.describe_tasks(cluster=cluster_match, tasks=tasks)
 
-    # print(f'{cluster_match}:::{service_match}')
+    logger.debug(f"{cluster_match}:::{service_match}")
     for task_detail in response.get("tasks"):
         if args.service in task_detail.get("group"):
             internal_ip = (
