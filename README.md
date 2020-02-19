@@ -5,8 +5,14 @@ Linting isn't about making people do things the Right Way, it's about everyone d
  * Consistancy is the most beneficial result of automated linting
 
 # example PR with consistant linting:
+https://github.com/ahonnecke/linting-talk/pull/1
+
+![image](https://user-images.githubusercontent.com/419355/74870912-c99bb700-5317-11ea-9543-218994d119ac.png)
 
 # example PR with inconsistant linting:
+https://github.com/ahonnecke/linting-talk/pull/2
+
+![image](https://user-images.githubusercontent.com/419355/74870841-a53fda80-5317-11ea-80e2-a5e4129d6aef.png)
 
 # Git Hooks (are powerful)
  * Has anyone here written git hooks for linting multiple different file types?
