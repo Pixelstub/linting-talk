@@ -2,6 +2,7 @@ import time
 import json
 import requests
 
+
 dsl_host = "google.com"
 
 global gone_start
